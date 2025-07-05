@@ -1,0 +1,19 @@
+openwrt-ipset-control/
+│
+├── README.md
+│
+├── scripts/
+│   ├── bloqueo_ipset_fw4.sh
+│   └── sync_ipset.sh
+│
+├── luci/
+│   ├── controller/
+│   │   ├── ipset_allowlist.lua
+│   │   └── ipset_block.lua
+│   │
+│   └── model/
+│       └── cbi/
+│           ├── ipset_allowlist.lua
+│           └── ipset_block_control.htm
+│
+└── sysupgrade.conf
