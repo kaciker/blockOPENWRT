@@ -1,0 +1,29 @@
+<%+header%>
+
+<h2>Control de Bloqueo de Internet</h2>
+<p>Activa o desactiva el bloqueo de salida a Internet para todas las IPs no permitidas según el ipset configurado en fw4.</p>
+
+<%
+if luci.http.formvalue("activate") then
+    os.execute("/root/bloqueo_ipset_fw4.sh activar >/dev/null 2>&1")
+elseif luci.http.formvalue("deactivate") then
+    os.execute("/root/bloqueo_ipset_fw4.sh desactivar >/dev/null 2>&1")
+end
+os.execute("sleep 0.3")
+local handle = io.popen("nft list chain inet fw4 forward | grep perm_block_wan")
+local result = handle:read("*a")
+handle:close()
+
+if #result > 0 then
+    write("<div style='color: red; font-weight: bold; margin: 10px 0;'>🔴 BLOQUEO ACTIVADO</div>")
+else
+    write("<div style='color: green; font-weight: bold; margin: 10px 0;'>🟢 BLOQUEO DESACTIVADO</div>")
+end
+%>
+
+<form method="post" action="">
+    <button type="submit" name="activate" class="cbi-button cbi-button-apply">Activar Bloqueo</button>
+    <button type="submit" name="deactivate" class="cbi-button cbi-button-remove">Desactivar Bloqueo</button>
+</form>
+
+<%+footer%>
