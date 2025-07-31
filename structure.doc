@@ -2,10 +2,10 @@ openwrt-ipset-control/
 │
 ├── README.md
 │
-├── scripts/
-│   ├── bloqueo_ipset_fw4.sh
+├── usr/bin/
 │   └── sync_ipset.sh
-│
+├── root/
+│   ├── bloqueo_ipset_fw4.sh
 ├── luci/
 │   ├── controller/
 │   │   ├── ipset_allowlist.lua
